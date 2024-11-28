@@ -52,3 +52,4 @@ Add a new item to the inventory.
     "nota": "10",
     "preco": "100"
 }
+

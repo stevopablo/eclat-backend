@@ -3,7 +3,6 @@ dotenv.config();
 import conectarAoBanco from "../config/dbConfig.js";
 import { ObjectId } from "mongodb";
 
-// Estabelecendo a conexão
 const conexao = await conectarAoBanco(process.env.CONEXAO);
 
 export async function getInventario() {
@@ -22,7 +21,7 @@ export async function getInventario() {
 export async function criaInventario(item) {
     try {
         const db = conexao.db("eclat-database");
-        const colecao = db.collection("inventario"); // Garantir que a coleção seja 'inventario'
+        const colecao = db.collection("inventario");
         console.log("Inserindo item:", item);
         const result = await colecao.insertOne(item);
         console.log("Item inserido com sucesso:", result);

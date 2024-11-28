@@ -28,7 +28,7 @@ export async function addInventario(req, res) {
 }
 
 export async function removerPorId(req, res) {
-    const { id } = req.params;  // Mudança: id agora vem pela URL
+    const { id } = req.params;
     if (!id) {
         return res.status(400).json({ error: "ID do item é obrigatório" });
     }
@@ -45,7 +45,7 @@ export async function removerPorId(req, res) {
 }
 
 export async function atualizarItem(req, res) {
-    const { id } = req.params;  // Mudança: id agora vem pela URL
+    const { id } = req.params;
     const updatedItem = req.body;
 
     if (!id || !updatedItem || typeof updatedItem !== 'object') {

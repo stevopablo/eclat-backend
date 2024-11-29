@@ -4,10 +4,11 @@ import { addInventario, atualizarItem, listarInventario, removerPorId } from '..
 
 const __dirname = path.resolve();
 
+// app.use(cors());
 const routes = (app) => {
     app.get('/', (req, res) => {
-        // res.sendFile(path.join(__dirname,  'index.html'));
-        res.status(200).json({message:"endpoint: /"})
+        res.sendFile(path.join(__dirname,  'index.html'));
+        // res.status(200).json({message:"endpoint: /"})
     });
 
     app.use(express.static(path.join(__dirname, 'public')));

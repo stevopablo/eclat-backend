@@ -6,7 +6,8 @@ const __dirname = path.resolve();
 
 const routes = (app) => {
     app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname,  'index.html'));
+        // res.sendFile(path.join(__dirname,  'index.html'));
+        res.status(200).json({message:"endpoint: /"})
     });
 
     app.use(express.static(path.join(__dirname, 'public')));

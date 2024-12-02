@@ -1,4 +1,4 @@
-import { criaInventario, deleteInventario, getInventario, putInventario } from "../models/inventarioModels.js";
+import { criaInventario, deleteInventario, getBuscaInventario, getInventario, putInventario } from "../models/inventarioModels.js";
 
 export async function listarInventario(req, res) {
     try {
@@ -61,5 +61,17 @@ export async function atualizarItem(req, res) {
     } catch (error) {
         console.error("🚀 ~ atualizarItem ~ error:", error);
         res.status(500).json({ error: "Erro ao atualizar item" });
+    }
+}
+
+
+export async function buscarInventario(req, res) {
+    const termo = req.query.termo;  // O termo de busca vem da query string
+
+    try {
+        const resultados = await getBuscaInventario(termo);
+        res.status(200).json(resultados);  // Retorna os resultados para o cliente
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao realizar a busca'});
     }
 }

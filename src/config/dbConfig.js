@@ -16,11 +16,3 @@ export default async function conectarAoBanco(stringConexao) {
     }
 }
 
-// import { Sequelize } from 'sequelize';
-
-// const sequelize = new Sequelize('eclat_database', 'root', 'root', {
-//   host: 'localhost',
-//   dialect: 'mysql'
-// });
-
-// export default sequelize;

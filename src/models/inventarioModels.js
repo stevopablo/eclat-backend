@@ -58,53 +58,26 @@ export async function putInventario(id, updateItem) {
     }
 }
 
-// import dotenv from 'dotenv';
-// dotenv.config();
-// import sequelize from '../config/dbConfig.js';
-// import Inventario from './inventario.js';
+export async function getBuscaInventario(termo) {
+    try {
+        const db = conexao.db("eclat-database");
+        const colecao = db.collection("inventario");
+        
+        // Convertendo o termo para minúsculas para garantir que a busca seja insensível a maiúsculas/minúsculas
+        const termoBusca = termo.toLowerCase();
 
-// await sequelize.sync(); 
+        // Filtrando os itens pelo nome ou descrição
+        const resultados = await colecao.find({
+            $or: [
+                { nome: { $regex: termoBusca, $options: 'i' } },  // Busca insensível a maiúsculas/minúsculas no campo 'nome'
+                { descricao: { $regex: termoBusca, $options: 'i' } }  // Busca insensível a maiúsculas/minúsculas no campo 'descricao'
+            ]
+        }).toArray();
 
-// export async function getInventario() {
-//   try {
-//     const inventario = await Inventario.findAll();
-//     console.log("Inventário listado:", inventario);
-//     return inventario;
-//   } catch (error) {
-//     console.error("Erro ao listar inventário:", error);
-//     throw error;
-//   }
-// }
-
-// export async function criaInventario(item) {
-//   try {
-//     const result = await Inventario.create(item);
-//     console.log("Item inserido com sucesso:", result);
-//     return result;
-//   } catch (error) {
-//     console.error("Erro ao criar item de inventário:", error);
-//     throw error;
-//   }
-// }
-
-// export async function deleteInventario(id) {
-//   try {
-//     const result = await Inventario.destroy({ where: { id } });
-//     console.log("Item removido:", result);
-//     return result;
-//   } catch (error) {
-//     console.error("Erro ao remover item:", error);
-//     throw error;
-//   }
-// }
-
-// export async function putInventario(id, updateItem) {
-//   try {
-//     const result = await Inventario.update(updateItem, { where: { id } });
-//     console.log("Item atualizado:", result);
-//     return result;
-//   } catch (error) {
-//     console.error("Erro ao atualizar item:", error);
-//     throw error;
-//   }
-// }
+        console.log("Resultados da busca:", resultados);
+        return resultados;
+    } catch (error) {
+        console.error("Erro ao buscar itens no inventário:", error);
+        throw error;
+    }
+}

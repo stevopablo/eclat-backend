@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-import { addInventario, atualizarItem, buscarInventario, listarInventario, removerPorId } from '../Controller/inventarioController.js';
+import { addInventario, atualizarItem, buscarInventario, buscarItem, listarInventario, removerPorId } from '../Controller/inventarioController.js';
 import cors from "cors"
 const __dirname = path.resolve();
 
@@ -23,6 +23,8 @@ const routes = (app) => {
     app.get('/inventario', listarInventario); 
 
     app.get("/buscar", buscarInventario)
+
+    app.get('/inventario/:id', buscarItem)
 
     app.post('/inventario', addInventario);  
 

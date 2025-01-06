@@ -1,4 +1,4 @@
-import { criaInventario, deleteInventario, getBuscaInventario, getInventario, putInventario } from "../models/inventarioModels.js";
+import { buscarPorId, criaInventario, deleteInventario, getBuscaInventario, getInventario, putInventario } from "../models/inventarioModels.js";
 
 export async function listarInventario(req, res) {
     try {
@@ -73,5 +73,19 @@ export async function buscarInventario(req, res) {
         res.status(200).json(resultados);  // Retorna os resultados para o cliente
     } catch (error) {
         res.status(500).json({ message: 'Erro ao realizar a busca'});
+    }
+}
+
+export async function buscarItem(req, res) {
+    const { id } = req.params;
+    try {
+        const item = await buscarPorId(id);
+        if (!item) {
+            return res.status(404).json({ error: "item não encontrado" });
+        }
+        res.status(200).json(item); // Corrigido para status 200
+    } catch (error) {
+        console.log("🚀 ~ buscarItem ~ error:", error);
+        res.status(500).json({ error: "erro ao buscar" });
     }
 }

@@ -81,3 +81,17 @@ export async function getBuscaInventario(termo) {
         throw error;
     }
 }
+
+
+export async function buscarPorId(id) {
+    const db = conexao.db("eclat-database");
+    const colecao = db.collection("inventario");
+    try{
+        const resultado = await colecao.findOne({_id: new ObjectId(id)})
+        console.log("🚀 ~ buscarPorId ~ resultado:", resultado)
+        return resultado
+    }catch(error){
+        console.log("🚀 ~ buscarPorId ~ error:", error)
+        throw error
+    }
+}
